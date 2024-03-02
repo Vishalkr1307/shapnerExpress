@@ -2,11 +2,15 @@ const http=require("http");
 const exress=require("express")
 const Admin=require("./route/admin")
 const Shop=require("./route/shop")
+const Login=require("./route/login")
+const Home=require("./route/home")
 const bodyParser=require("body-parser")
 const app=exress()
-app.use(bodyParser.urlencoded({ extended:false}))
+app.use(exress.json())
 app.use("/admin",Admin)
-app.use(Shop)
+app.use("/shop",Shop)
+app.use("/login",Login)
+app.use(Home)
 
 
 // app.use("/add-product",(re,res,next)=>{
@@ -52,6 +56,6 @@ app.use((req,res)=>{
 
 
 
-app.listen(3000,()=>{
-    console.log(`Express listening on ${3000}`)
+app.listen(5500,()=>{
+    console.log(`Express listening on ${5500}`)
 })
