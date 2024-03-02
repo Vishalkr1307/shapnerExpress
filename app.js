@@ -4,13 +4,17 @@ const Admin=require("./route/admin")
 const Shop=require("./route/shop")
 const Login=require("./route/login")
 const Home=require("./route/home")
+const Contact=require("./route/contact")
 const bodyParser=require("body-parser")
+const path=require("path")
 const app=exress()
+app.use(exress.static(path.join(__dirname,'public')))
 app.use(exress.json())
 app.use("/admin",Admin)
-app.use("/shop",Shop)
+app.use("/",Shop)
 app.use("/login",Login)
 app.use(Home)
+app.use("/contactus",Contact)
 
 
 // app.use("/add-product",(re,res,next)=>{
@@ -50,7 +54,7 @@ app.use(Home)
 // })
 
 app.use((req,res)=>{
-    res.status(404).send("Forbidden Page is not Presnt")
+    res.status(404).sendFile(path.join(__dirname,'views','404.html'))
 })
 
 
