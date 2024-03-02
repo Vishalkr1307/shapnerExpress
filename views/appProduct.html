@@ -19,7 +19,7 @@
         </nav>
     </header>
     <main>
-        <form action="/add-product" method="POST">
+        <form action="/admin/add-product" method="POST">
             <label for="product"></label>
             <input type="text" name="product" id="product">
             <button type="submit">Add</button>
@@ -28,3 +28,19 @@
     
 </body>
 </html>
+<script>
+    const productForm=document.querySelector("form")
+    productForm.addEventListener("submit",handleProduct)
+    function handleProduct(event){
+        event.preventDefault();
+        const product=productForm.elements[0].value
+        fetch("/admin/add-product",{
+            method:"POST",
+            headers:{
+                'Content-Type':'application/json',
+            },
+            body:JSON.stringify({product:product})
+        })
+
+    }
+</script>
