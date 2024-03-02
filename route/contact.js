@@ -2,12 +2,8 @@ const express=require("express")
 const router=express.Router()
 const path=require("path")
 const rootPath=require("..//util/path")
+const {getContact,postController}=require("..//contoller/contactController")
 
-router.get("",(req,res)=>{
-    res.sendFile(path.join(rootPath,'views','contact.html'));
-
-})
-router.post("/success",(req,res)=>{
-    res.send("<h1>form successfully registered<h1>");
-})
+router.get("",getContact)
+router.post("/success",postController)
 module.exports=router
