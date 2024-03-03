@@ -9,6 +9,23 @@ const getAdmin=(req,res)=>{
 
     res.sendFile(path.join(rootPath,'views','appProduct.html'))
 }
+const singleAdmin=(req,res)=>{
+    const id=req.params.id
+    console.log(id)
+    Product.fidById(id,(item)=>{
+       res.send(`<html>
+        <head>
+        <title>Page-Detail</title>
+        </head>
+        <body>
+        <h1>Page Details</h1>
+        <p>${item.id}</p>
+        <p>${item.product}</p>
+        <body>
+       </html>`)
+    })
+
+}
 const postAdmin=(req,res,next)=>{
    
     
@@ -17,4 +34,4 @@ const postAdmin=(req,res,next)=>{
     res.redirect('/')
 }
 
-module.exports={getAdmin,postAdmin}
+module.exports={getAdmin,postAdmin,singleAdmin}

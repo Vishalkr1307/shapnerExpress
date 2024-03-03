@@ -1,9 +1,28 @@
 const path = require("path");
 const fs = require("fs");
+function getData(cb){
+    const rootPath=path.join(path.dirname(process.mainModule.filename),'data','product.json');
+    fs.readFile(rootPath, 'utf8',(err,data)=>{
+        if(err){
+            alert("Error reading")
+        }
+        try{
+            const product = JSON.parse(data);
+            cb(product)
+
+        }
+        catch(err){
+            console.log('Error reading',err)
+        }
+    })
+
+}
+// getData()
 
 module.exports = class Product {
   constructor(t) {
     this.product = t;
+    this.id=Math.floor(Math.random()*1000+9000).toString();
   }
   save() {
     const newPath = path.join(
@@ -51,5 +70,13 @@ module.exports = class Product {
         cb([]);
       }
     });
+  }
+  static fidById(id,cb){
+    getData((item)=>{
+        const serchItem=item.find((item)=>item.id==id)
+        cb(serchItem)
+
+    })
+
   }
 };
