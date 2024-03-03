@@ -9,4 +9,19 @@ const getCart=(req,res)=>{
 
 
 }
-module.exports={getCart}
+const updateCart=(req,res)=>{
+    const id="9704"
+    Cart.updateCart(id,{
+        product:"let update",
+        id:id
+    })
+    res.send("Cart updated ")
+
+}
+const deleteCart=(req,res)=>{
+    const id="9704"
+    Cart.deleteCart(id)
+    res.send("Cart deleted")
+
+}
+module.exports={getCart,updateCart,deleteCart}

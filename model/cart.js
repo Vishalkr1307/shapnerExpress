@@ -2,9 +2,27 @@ const path=require("path")
 const rootPath=path.join(path.dirname(process.mainModule.filename))
 const fs=require("fs")
 const { isUtf8 } = require("buffer")
+const { json } = require("body-parser")
+const p=path.join(rootPath,'data','cart.json')
+
+function readData(cb){
+    fs.readFile(p, 'utf8', (err,data)=>{
+        if(err){
+            console.log("Error reading",err)
+        }
+        try{
+            let data1 = JSON.parse(data)
+            cb(data1)
+
+        }
+        catch(err){
+            console.log("Error reading",err)
+        }
+    })
+
+}
 module.exports=class Cart{
     static addCartProduct(id,productPrice){
-        const p=path.join(rootPath,'data','cart.json')
         fs.readFile(p,isUtf8,(err,data)=>{
             let cart={product:[],price:0}
             if(err){
@@ -39,6 +57,26 @@ module.exports=class Cart{
             catch(err){
                 console.error("Error parsing JSON:", err)
             }
+        })
+
+    }
+    static updateCart(id,data){
+        readData((item)=>{
+            const index=item.findIndex((item)=>item.id==id);
+            item.splice(index,1,data);
+            fs.writeFile(p,JSON.stringify(item),(err)=>{
+                console.log(err);
+            })
+        })
+
+    }
+    static deleteCart(id){
+        readData((item)=>{
+            const index=item.findIndex((item)=>item.id==id);
+            item.splice(index,1);
+            fs.writeFile(p,JSON.stringify(item),(err)=>{
+                console.log(err);
+            })
         })
 
     }
