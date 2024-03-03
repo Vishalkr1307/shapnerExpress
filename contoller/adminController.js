@@ -4,6 +4,7 @@ const Product=require("..//model/product")
 const getAdmin=(req,res)=>{
     
     Product.fetchAll((data)=>{
+        // return res.status(200).send(data)
 
     })
 
@@ -21,6 +22,7 @@ const singleAdmin=(req,res)=>{
         <h1>Page Details</h1>
         <p>${item.id}</p>
         <p>${item.product}</p>
+        <button>Add Cart</button>
         <body>
        </html>`)
     })

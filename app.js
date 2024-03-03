@@ -6,6 +6,7 @@ const Login=require("./route/login")
 const Home=require("./route/home")
 const Contact=require("./route/contact")
 const bodyParser=require("body-parser")
+const Cart=require("./route/cart")
 const path=require("path")
 const app=exress()
 app.use(exress.static(path.join(__dirname,'public')))
@@ -15,6 +16,7 @@ app.use("/",Shop)
 app.use("/login",Login)
 app.use(Home)
 app.use("/contactus",Contact)
+app.use("/cart",Cart)
 
 
 // app.use("/add-product",(re,res,next)=>{
